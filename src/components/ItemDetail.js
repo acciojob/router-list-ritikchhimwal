@@ -1,23 +1,26 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { items } from "../App"; // Import mock data
+import { useParams, Link } from "react-router-dom";
 
-function ItemDetail() {
-  const { id } = useParams(); // Extract the ID from the URL
-  const item = items.find((item) => item.id === id); // Find the item based on the ID
+const items = [
+  { id: 1, name: "Item 1", description: "Description for Item 1" },
+  { id: 2, name: "Item 2", description: "Description for Item 2" },
+  { id: 3, name: "Item 3", description: "Description for Item 3" },
+];
 
-  // Display a message if the item is not found
+const ItemDetail = () => {
+  const { id } = useParams();
+  const item = items.find((item) => item.id === parseInt(id));
+
   if (!item) {
-    return <h2>Item not found!</h2>;
+    return <p>Item not found</p>;
   }
 
   return (
     <div>
       <h1>{item.name}</h1>
       <p>{item.description}</p>
-      <Link to="/">Back to Item List</Link>
     </div>
   );
-}
+};
 
 export default ItemDetail;
